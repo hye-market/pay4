@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>혜마켓 송금</title>
+<style>
+:root{--bg:#fff;--ink:#3b3b3b;--sub:#7b8470;--green:#5f8c2f;--leaf:#86b152;--yel:#f7d060;--soft:#f3f7ea;--ysoft:#fff6d3;--line:#e2ead3;--on:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#161912;--ink:#f1f0e4;--sub:#a3ad96;--green:#86b152;--soft:#212619;--ysoft:#2e2a14;--line:#323a27;--on:#14200a}}
+:root[data-theme="dark"]{--bg:#161912;--ink:#f1f0e4;--sub:#a3ad96;--green:#86b152;--soft:#212619;--ysoft:#2e2a14;--line:#323a27;--on:#14200a}
+*{box-sizing:border-box;touch-action:manipulation}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",system-ui,sans-serif}
+main{max-width:420px;margin:0 auto;padding:28px 20px 72px;min-height:100vh}
+.brand{display:flex;align-items:center;gap:8px;font-weight:700;color:var(--sub);font-size:14px}
+h1,.wm,.ch b{font-family:ui-rounded,"SF Pro Rounded","Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif}
+h1{font-size:22px;font-weight:800;margin:22px 0 4px}
+.sub{color:var(--sub);font-size:14px;margin:0 0 20px}
+label{display:block;font-size:13px;color:var(--sub);margin:16px 0 6px}
+input,.pick,select{width:100%;padding:14px 16px;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:12px;outline:none}
+input:focus,.pick:focus-visible,button:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+.pick{display:flex;align-items:center;gap:10px;text-align:left;cursor:pointer}
+.pick .g{flex:1;color:var(--sub)}.pick .g.on{color:var(--ink)}
+.btn{display:block;width:100%;margin-top:20px;padding:15px;border:0;border-radius:12px;background:var(--green);color:var(--on);font:inherit;font-weight:800;cursor:pointer}
+.btn.line{background:none;color:var(--sub);border:1px solid var(--line);font-weight:500;margin-top:12px}
+.dot{width:30px;height:30px;border-radius:50%;flex:none;display:grid;place-items:center;color:#fff;font-size:10px;font-weight:700}
+.qr{display:inline-block;padding:12px;background:#fff;border-radius:12px;border:1px solid var(--line)}.qr img,.qr canvas{display:block}
+.card{margin-top:24px;border:1px solid var(--line);border-radius:22px;padding:20px}
+.ch{display:flex;align-items:center;gap:12px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.ch b{display:block;font-size:16px}.ch span{font-size:13px;color:var(--sub)}
+.qbox{margin:18px 0;background:var(--soft);border-radius:18px;padding:22px;text-align:center}
+.info{background:var(--soft);border-radius:14px;padding:16px;text-align:center}
+.info b{font-size:15px}.info span{font-size:12px;color:var(--sub)}
+.an{font:700 22px ui-monospace,Menlo,monospace;color:var(--green);margin:6px 0;word-break:break-all}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.two .btn{margin-top:14px}
+.tip{font-size:13px;color:var(--sub);margin:10px 0 0;word-break:break-all}
+.pay{text-align:center;padding-top:40px}
+.pay .bk{display:inline-flex;align-items:center;gap:8px;color:var(--sub)}
+.acc{font-size:30px;font-weight:800;margin:14px 0 4px;word-break:break-all}
+.pay .nm{color:var(--green);font-weight:700}
+.pay .pick{margin-top:36px}
+.pay .hint{text-align:left;color:var(--sub);font-size:13px;margin:8px 4px 0}
+.note{background:var(--ysoft);border-radius:12px;padding:12px 14px;color:var(--ink)!important;font-size:14px!important;margin-top:14px!important;text-align:left}
+.it{display:grid;grid-template-columns:1fr 54px 84px 32px;gap:6px;margin-bottom:6px}.it input{padding:11px 10px;font-size:15px}
+.x2{border:0;background:none;color:var(--sub);font-size:16px;cursor:pointer}
+.ord{margin-top:26px;text-align:left;background:var(--ysoft);border-radius:14px;padding:14px 16px}
+.ord .r{display:flex;justify-content:space-between;gap:10px;font-size:14px;padding:3px 0}.ord .r span:first-child{color:var(--sub)}
+.ord .t{display:flex;justify-content:space-between;border-top:1px solid var(--line);margin-top:8px;padding-top:10px;font-weight:800;font-size:18px}.ord .t b{color:var(--green)}
+.chk{display:flex;align-items:center;gap:8px;margin:8px 0;font-size:14px;color:var(--ink);cursor:pointer}.chk input{width:20px;height:20px;padding:0;accent-color:var(--green)}.chk small{color:var(--sub)}
+.hd{display:flex;align-items:center;gap:10px}.st{flex:1;height:12px;background:repeating-linear-gradient(-60deg,var(--leaf) 0 2px,transparent 2px 6px)}
+.wm{text-align:center;font-weight:900;font-size:30px;line-height:1;letter-spacing:1px;margin:4px 0 2px}.wm i{font-style:normal;color:var(--yel)}.wm b{color:var(--leaf)}
+.chk.off{opacity:.45;cursor:default}.chk span{line-height:1.35}
+.by{text-align:center;color:var(--sub);font-size:12px;font-weight:700;padding:0 0 calc(18px + env(safe-area-inset-bottom,0px))}
+.foot{position:fixed;left:0;right:0;bottom:calc(38px + env(safe-area-inset-bottom,0px));text-align:center;color:var(--sub);font-size:12px;opacity:.7}
+#sh{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:flex-end;z-index:9}
+#sh.on{display:flex}
+.sheet{width:100%;max-width:420px;margin:0 auto;height:78%;background:var(--bg);border-radius:20px 20px 0 0;padding:12px 16px 0;display:flex;flex-direction:column}
+.x{align-self:center;width:40px;height:40px;border-radius:50%;border:0;background:var(--soft);color:var(--ink);cursor:pointer}
+.sheet input{margin:10px 0 4px;background:var(--soft);border-color:transparent}
+.list{overflow:auto;flex:1;padding-bottom:30px}
+.sec{font-size:12px;color:var(--sub);margin:14px 4px 2px}
+.row{display:flex;align-items:center;gap:12px;width:100%;padding:11px 4px;border:0;background:none;color:var(--ink);font:inherit;text-align:left;cursor:pointer;border-radius:10px}
+.row:active{background:var(--soft)}
+#toast{position:fixed;left:50%;bottom:64px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:11px 16px;border-radius:12px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:10;max-width:90%;text-align:center}
+#toast.on{opacity:1}
+</style>
+</head>
+<body>
+<main id="app"></main>
+<div class="by">by 혜마켓 혜랑이</div>
+<div id="sh" role="dialog" aria-modal="true" aria-label="은행 선택">
+  <div class="sheet"><button class="x" id="cx" aria-label="닫기">✕</button><input id="q" placeholder="은행명 검색" autocomplete="off"><div class="list" id="list"></div></div>
+</div>
+<div id="toast"></div>
+<script>
+// [이름, 로고글자, 색, 아이폰 앱주소, 안드로이드 앱주소, 안드로이드 패키지명]
+const BANKS=[
+["국민은행","국민","#6b2d8f","kbbank://","kbbank://call","com.kbstar.kbbank"],
+["신한은행","신한","#2350ff","shinhanSol://","shinhansol://","com.shinhan.sbanking"],
+["우리은행","우리","#2a63a9","NewSmartPib://","wooribank://","com.wooribank.smart.npib"],
+["하나은행","하나","#2f8a86","hanabank-oqf://","hanabank-oqf://","com.hanabank.oqf"],
+["농협 · NH스마트뱅킹","NH","#3ea35b","newnhsmartbanking://","newnhsmartbanking://","nh.smart.banking"],
+["농협 · NH콕뱅크","NH","#3ea35b","nhcok://","nhcok://","nh.smart.nhcok"],
+["IBK기업은행","IBK","#254c9e","ionebank://","ionebank://","com.ibk.android.ionebank"],
+["카카오뱅크","카카오","#f7cf3d","kakaobank://","kakaobank://","com.kakaobank.channel"],
+["토스뱅크","토스","#2c5cff","supertoss://send?accountNo={A}","supertoss://send?accountNo={A}","viva.republica.toss"],
+["케이뱅크","케이","#ee5140","ukbanksmartbankrelay://","ukbanksmartbankshortcut://","com.kbankwith.smartbank"],
+["SC제일은행","SC","#2a1a6b","scbmobile://","scbmobile://","com.scbank.ma30"],
+["씨티은행","씨티","#173a6b","citimobileapp://","citimobileapp://smartpay","kr.co.citibank.citimobile"],
+["우체국","우체국","#d62c26","com.epost.psf.sd://","com.epost.psf.sd://","com.epost.psf.sdsi"],
+["새마을금고","MG","#46a557","kfccsb://","kfccsb://","com.smg.spbs"],
+["신협","신협","#e98a3a","","cuonbank://onbank.cu.co.kr?SCHEME_ACTION=REQUEST_SCHEME_WIDGET_TRANSFER&SCHEME_PARAM=","kr.co.cu.onbank"],
+["SBI저축은행","저축","#586b78","saidabank://deep_link_url","sbi://sbi_url","com.sbi.saidabank"],
+["부산은행","부산","#1f4a99","bslink://call","bslink://call","kr.co.busanbank.mbp"],
+["경남은행","경남","#205099","kakaoed1616004f7cc49ecf503b70e9221365://kakaolink","alopex://psb","com.knb.psb"],
+["광주은행","광주","#ecac3b","kakao6ec8812a5d4d44c18cadd24f2dd65eca://kakaolink","kjbank://asb","com.kjbank.asb.pbanking"],
+["전북은행","전북","#357a45","jbprivatebank://","jbprivatebank://","kr.co.jbbank.privatebank"],
+["제주은행","제주","#3d8ecf","newjbanksmart://action","newjbanksmart://action","com.jejubank.smartnew"],
+["iM뱅크","iM","#489fdf","mbanking://open","mbanking://open","kr.co.dgb.dgbm"],
+["산업은행","산업","#194785","smartkdb://","smartkdbnvs://","co.kr.kdb.android.smartkdb"],
+["수협은행","수협","#2461ab","kakao4251fde6ccd98c9326127797ddd3aad0://kakaolink","suhyuppsmb://suhyuplink","com.suhyup.psmb"]];
+const total=a=>a.reduce((s,x)=>s+(x.q||0)*(x.p||0),0),fmt=n=>n.toLocaleString("ko-KR");
+const FEE=4000,FEE_ISLAND=7000,FREE100=100000,FREE50=50000; // 배송비 규칙 (여기서 금액 수정)
+let shipOpt="base",island=false; // base=기본 4천원 / free50=5만원 이상 무배(틱톡 팬가입) / free100=10만원 이상 무배
+const fee=()=>total(cur.i)>0?(shipOpt==="base"?FEE:0)+(island?FEE_ISLAND:0):0,grand=()=>total(cur.i)+fee();
+const $=s=>document.querySelector(s),bank=n=>BANKS.find(b=>b[0]===n)||[n,n.slice(0,2),"#999",""];
+const dot=b=>`<span class="dot" style="background:${b[2]};${b[2]==="#f7cf3d"?"color:#3a2f00":""}">${b[1]}</span>`;
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const logo=(s,t)=>`<svg width="${s}" height="${Math.round(s*1.1)}" viewBox="0 0 100 110" role="img" aria-label="혜마켓"><g fill="none" stroke="#3b3b3b" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="30" cy="22" rx="9" ry="19" transform="rotate(-4 30 22)" fill="#fff"/><ellipse cx="30" cy="23" rx="3.5" ry="13" transform="rotate(-4 30 23)"/><ellipse cx="70" cy="22" rx="9" ry="19" transform="rotate(4 70 22)" fill="#fff"/><ellipse cx="70" cy="23" rx="3.5" ry="13" transform="rotate(4 70 23)"/><path d="M27 38C31 54 12 62 12 82C12 98 28 106 50 106C72 106 88 98 88 82C88 62 69 54 73 38C65 48 35 48 27 38Z" fill="#fff"/></g><circle cx="50" cy="72" r="14" fill="#f7d060" stroke="#3b3b3b" stroke-width="2.2"/><circle cx="45" cy="69" r="1.8" fill="#3b3b3b"/><circle cx="55" cy="69" r="1.8" fill="#3b3b3b"/><path d="M45 75q5 4 10 0" fill="none" stroke="#3b3b3b" stroke-width="2" stroke-linecap="round"/>${t?`<text x="50" y="97" text-anchor="middle" font-size="6.5" font-weight="800" fill="#3b3b3b" font-family="system-ui,sans-serif">HAVE A GOODDAY</text>`:""}</svg>`;
+const brandHd=()=>`<div class="hd"><span class="st"></span>${logo(78,1)}<span class="st"></span></div><div class="wm"><i>HYE</i> <b>MARKET</b></div>`;
+let onPick=null,recentOn=false,cur={b:"",a:"",n:"",i:[],m:0},tm;
+
+function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove("on"),3000)}
+async function copy(t){try{await navigator.clipboard.writeText(t);return true}catch(e){try{const i=document.createElement("input");i.value=t;document.body.appendChild(i);i.select();const ok=document.execCommand("copy");i.remove();return ok}catch(_){return false}}}
+function recent(){try{return JSON.parse(localStorage.getItem("rb")||"[]")}catch(e){return[]}}
+function saveRecent(n){try{localStorage.setItem("rb",JSON.stringify([n]))}catch(e){}}
+
+// 은행 선택 시트 (이벤트 위임으로 가볍게)
+function openSheet(cb,rc){onPick=cb;recentOn=rc;$("#q").value="";$("#sh").classList.add("on");draw()}
+function closeSheet(){$("#sh").classList.remove("on")}
+function draw(){
+  const k=$("#q").value.trim().toLowerCase(),rc=recentOn&&!k?recent():[];
+  const row=n=>`<button class="row" data-n="${esc(n)}">${dot(bank(n))}<span>${esc(n)}</span></button>`;
+  const all=BANKS.map(b=>b[0]).filter(n=>n.toLowerCase().includes(k));
+  $("#list").innerHTML=(rc.length?`<div class="sec">최근 사용</div>${rc.map(row).join("")}`:"")+`<div class="sec">전체 은행</div>`+(all.map(row).join("")||`<p class="tip">검색 결과가 없어요.</p>`);
+}
+$("#list").onclick=e=>{const r=e.target.closest(".row");if(r){closeSheet();onPick(r.dataset.n)}};
+$("#cx").onclick=closeSheet;
+$("#sh").onclick=e=>{if(e.target.id==="sh")closeSheet()};
+$("#q").oninput=()=>{clearTimeout(tm);tm=setTimeout(draw,80)};
+
+// 라우팅
+function route(){
+  const p=new URLSearchParams(location.search.slice(1));
+  const b=p.get("b")||"",a=(p.get("a")||"").replace(/[^0-9-]/g,"").slice(0,30),n=(p.get("n")||"").slice(0,30);
+  const m=[1,2].includes(+p.get("m"))?+p.get("m"):0;
+  if(b&&a){cur={b:b.slice(0,20),a,n,i:[],m};shipOpt="base";island=false;restored=loadCart();calc()}else make();
+}
+
+// 만드는 화면 (QR 라이브러리는 이때만 불러옴)
+function loadQR(){return window.QRCode?Promise.resolve():new Promise((ok,no)=>{const s=document.createElement("script");s.src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js";s.onload=ok;s.onerror=no;document.head.appendChild(s)})}
+function make(){
+  $("#app").innerHTML=`${brandHd()}
+  <h1>송금 QR 만들기</h1><p class="sub">고객이 QR을 열면 은행 선택 화면이 나와요.</p>
+  <label>받을 은행</label>
+  <button class="pick" id="pb">${cur.b?dot(bank(cur.b)):""}<span class="g ${cur.b?"on":""}">${cur.b||"은행 선택"}</span><span>⌄</span></button>
+  <label for="ac">계좌번호</label><input id="ac" inputmode="numeric" placeholder="숫자만 입력" value="${esc(cur.a)}" autocomplete="off">
+  <label for="nm">예금주</label><input id="nm" placeholder="예: 혜마켓" value="${esc(cur.n)}" autocomplete="off">
+  <label for="mk">고객 화면의 계좌번호 표시</label>
+  <select id="mk"><option value="0">전체 공개</option><option value="1" ${cur.m===1?"selected":""}>일부만 공개 (333••••••0041)</option><option value="2" ${cur.m===2?"selected":""}>비공개 (은행 선택 시 자동 복사)</option></select>
+  <button class="btn" id="go">QR 만들기</button><div id="out"></div>`;
+  $("#pb").onclick=()=>openSheet(n=>{cur.a=$("#ac").value;cur.n=$("#nm").value;cur.m=+$("#mk").value;cur.b=n;make()},false);
+  $("#go").onclick=async()=>{
+    cur.a=$("#ac").value.replace(/[^0-9-]/g,"");cur.n=$("#nm").value.trim();cur.m=+$("#mk").value;
+    if(!cur.b)return toast("은행을 선택해 주세요");
+    if(cur.a.replace(/-/g,"").length<8)return toast("계좌번호를 확인해 주세요");
+    if(!cur.n)return toast("예금주를 입력해 주세요");
+    const url=location.href.split("#")[0].split("?")[0]+"?"+new URLSearchParams(cur.m?{b:cur.b,a:cur.a,n:cur.n,m:cur.m}:{b:cur.b,a:cur.a,n:cur.n});
+    $("#out").innerHTML=`<div class="card"><div class="ch">${logo(34)}<div><b>혜마켓 송금</b><span>스마트 계좌이체</span></div></div>
+      <div class="qbox"><div class="qr" id="qr"></div></div>
+      <div class="info"><b>${esc(cur.b)} · ${esc(cur.n)}</b><div class="an">${esc(cur.a)}</div><span>스캔 시 주문 금액 계산 → 은행 선택 순서로 진행돼요</span>${cur.m?`<div class="tip">고객 화면 계좌번호: ${cur.m===1?"일부만 공개":"비공개"}<br>※ 화면에서만 가려져요. QR 주소에는 계좌번호가 그대로 들어 있어요.</div>`:""}</div>
+      <div class="two"><button class="btn line" id="dl">다운로드</button><button class="btn line" id="cl">링크 복사</button></div>
+      <p class="tip" style="text-align:center">입력하신 계좌 정보는 서버에 저장되지 않습니다<br>QR이 여는 주소: ${esc(url.split("?")[0])}</p></div>`;
+    try{await loadQR();new QRCode($("#qr"),{text:url,width:220,height:220,correctLevel:QRCode.CorrectLevel.M})}catch(e){return toast("QR 도구를 불러오지 못했어요. 인터넷을 확인해 주세요")}
+    $("#dl").onclick=()=>{const c=$("#qr canvas");if(!c)return toast("QR을 길게 눌러 저장해 주세요");try{const a=document.createElement("a");a.href=c.toDataURL("image/png");a.download="혜마켓-송금-QR.png";document.body.appendChild(a);a.click();a.remove()}catch(e){toast("QR을 길게 눌러 저장해 주세요")}};
+    $("#cl").onclick=async()=>toast(await copy(url)?"링크를 복사했어요":"복사에 실패했어요");
+    $("#out").scrollIntoView({behavior:"smooth"});
+  };
+}
+
+// 고객 화면 (외부 요청 없음)
+function pay(){
+  const b=bank(cur.b),toss="supertoss://send?accountNo="+cur.a.replace(/-/g,"");
+  $("#app").innerHTML=`<div class="pay">${brandHd()}
+    <div class="bk" style="margin-top:34px">${dot(b)}<span>${esc(cur.b)}</span></div>
+    <div class="acc"${cur.m===2?' style="font-size:20px;color:var(--sub)"':""}>${esc(maskAcc())}</div><div class="nm">예금주 ${esc(cur.n)}</div>
+    ${cur.i.length?`<div class="ord" id="ord"></div>`:""}<button class="btn line" id="ed" style="margin-top:10px">← 상품 ${cur.i.length?"수정":"입력하기"}</button>
+    <button class="pick" id="pk"><span class="g">은행 선택</span><span>⌄</span></button>
+    <p class="hint">내 은행을 고르면 앱이 열려요. 계좌번호는 자동 복사돼요.</p><p class="hint" id="nt"></p>
+    <button class="btn line" id="cp">계좌번호 복사</button>${cur.i.length?`<button class="btn line" id="ca">금액 복사 (${fmt(total(cur.i))}원)</button>`:""}
+    <button class="btn line" id="tb">토스로 바로 송금</button></div>
+    <div class="foot">이 페이지는 계좌 정보를 저장하지 않습니다</div>`;
+  renderOrd();
+  $("#ed").onclick=()=>calc();
+  $("#tb").onclick=()=>{location.href=toss};
+  if($("#ca"))$("#ca").onclick=()=>toast(syncCopy(String(grand()))?fmt(grand())+"원을 복사했어요":"복사에 실패했어요");
+  $("#cp").onclick=()=>toast(syncCopy(cur.a.replace(/-/g,""))?"계좌번호를 복사했어요":"복사에 실패했어요. 번호를 길게 눌러 복사해 주세요");
+  $("#pk").onclick=()=>openSheet(n=>{saveRecent(n);launch(n)},true);
+}
+const feeRows=sub=>!sub?`<div class="r"><span>배송비</span><span>-</span></div>`:`<div class="r"><span>배송비</span><span>${shipOpt==="base"?fmt(FEE)+"원":"무료"}</span></div>${shipOpt==="free50"?`<div class="r"><span>혜택</span><span>틱톡 팬가입 인증 필요</span></div>`:""}${island?`<div class="r"><span>제주·산간 추가</span><span>${fmt(FEE_ISLAND)}원</span></div>`:""}`;
+function renderOrd(){
+  const o=$("#ord");if(!o)return;
+  o.innerHTML=`<div class="r" style="font-weight:700"><span style="color:var(--ink)">주문 내역</span></div>${cur.i.map(x=>`<div class="r"><span>${esc(x.n||"상품")} × ${x.q}</span><span>${fmt(x.q*x.p)}원</span></div>`).join("")}${feeRows(1)}<div class="t"><span>합계</span><b>${fmt(grand())}원</b></div>`;
+  const ca=$("#ca");if(ca)ca.textContent="금액 복사 ("+fmt(grand())+"원)";
+}
+function drawShip(){
+  const t=total(cur.i);
+  if(t>=FREE100)shipOpt="free100";else if(shipOpt==="free100"||(shipOpt==="free50"&&t<FREE50))shipOpt="base";
+  const e100=t>=FREE100,e50=t>=FREE50&&!e100;
+  const row=(id,on,dis,txt,sm)=>`<label class="chk${dis?" off":""}"><input type="checkbox" id="${id}" ${on?"checked":""} ${dis?"disabled":""}><span>${txt}${sm?` <small>${sm}</small>`:""}</span></label>`;
+  $("#ships").innerHTML=row("s1",shipOpt==="free100",!e100,"10만원 이상 무료배송","(10만원 이상 구매 시 자동 적용)")+row("s2",shipOpt==="free50",!e50,"5만원 이상 무료배송","(틱톡 '팬가입' 혜택 · 인증 필요)")+row("s3",shipOpt==="base",e100,`기본 배송비 ${fmt(FEE)}원`,"")+row("s4",island,false,`제주·산간 +${fmt(FEE_ISLAND)}원 추가`,"");
+}
+function sumUI(){
+  drawShip();
+  const sub=total(cur.i);
+  $("#sm").innerHTML=`<div class="r"><span>상품 합계</span><span>${fmt(sub)}원</span></div>${feeRows(sub)}<div class="t"><span>합계</span><b>${fmt(grand())}원</b></div>`;
+}
+function drawItems(){
+  $("#its").innerHTML=cur.i.map((x,k)=>`<div class="it" data-k="${k}"><input class="f1" placeholder="상품명(선택)" value="${esc(x.n)}" maxlength="20"><input class="f2" inputmode="numeric" placeholder="수량" value="${x.q||""}"><input class="f3" inputmode="numeric" placeholder="단가(원)" value="${x.p||""}"><button class="x2" aria-label="삭제">✕</button></div>`).join("");
+  sumUI();
+}
+// 1단계: QR 스캔 후 나오는 상품 입력·합계 화면
+function calc(){
+  if(!cur.i.length)cur.i.push({n:"",q:1,p:0});
+  $("#app").innerHTML=`<div class="pay" style="padding-top:24px">${brandHd()}
+    <h1 style="margin-top:26px">주문 금액 계산</h1><p class="sub">${restored?"이전에 입력한 내용을 불러왔어요.":"구매하신 상품을 입력하면 합계를 계산해 드려요."}</p>
+    <div style="text-align:left"><div id="its"></div><button class="btn line" id="ad" style="margin-top:6px">+ 상품 추가</button>
+    <div id="ships"></div>
+    <div class="ord" id="sm" style="margin-top:12px"></div></div>
+    <button class="btn" id="nx">다음 · 은행 선택</button><button class="btn line" id="sk">금액 없이 계좌만 보기</button><button class="btn line" id="rs" style="border:0;margin-top:4px">입력 초기화</button></div>`;
+  drawItems();
+  $("#its").oninput=e=>{const r=e.target.closest(".it");if(!r)return;const x=cur.i[+r.dataset.k],c=e.target.className,v=e.target.value;if(c==="f1")x.n=v;else if(c==="f2")x.q=parseInt(v.replace(/\D/g,""))||0;else if(c==="f3")x.p=parseInt(v.replace(/\D/g,""))||0;sumUI();saveCart()};
+  $("#its").onclick=e=>{if(e.target.classList.contains("x2")){cur.i.splice(+e.target.closest(".it").dataset.k,1);if(!cur.i.length)cur.i.push({n:"",q:1,p:0});drawItems();saveCart()}};
+  $("#ad").onclick=()=>{if(cur.i.length>=10)return toast("상품은 10개까지 추가할 수 있어요");cur.i.push({n:"",q:1,p:0});drawItems();saveCart()};
+  $("#ships").onchange=e=>{const id=e.target.id,on=e.target.checked;if(id==="s4")island=on;else if(id==="s1")shipOpt=on?"free100":"base";else if(id==="s2")shipOpt=on?"free50":"base";else shipOpt="base";sumUI();saveCart()};
+  $("#nx").onclick=()=>{cur.i=cur.i.filter(x=>x.q>0&&x.p>0);saveCart();if(!cur.i.length){cur.i.push({n:"",q:1,p:0});return toast("상품 단가를 입력해 주세요")}pay()};
+  $("#sk").onclick=()=>{cur.i=[];pay()};
+  $("#rs").onclick=()=>{clearCart();cur.i=[];shipOpt="base";island=false;restored=false;calc()};
+}
+function maskAcc(){
+  const d=cur.a.replace(/-/g,"");
+  if(cur.m===2)return"계좌번호 비공개";
+  if(cur.m===1){const h=d.length>8?3:2;return d.slice(0,h)+"•".repeat(Math.max(3,d.length-h-4))+d.slice(-4)}
+  return cur.a;
+}
+const ck=()=>"cart:"+cur.b+":"+cur.a.replace(/-/g,"");
+function saveCart(){try{localStorage.setItem(ck(),JSON.stringify({i:cur.i.filter(x=>x.n||x.p),opt:shipOpt,island}))}catch(e){}}
+function loadCart(){try{const c=JSON.parse(localStorage.getItem(ck())||"null");if(c&&c.i&&c.i.length){cur.i=c.i.slice(0,10).map(x=>({n:String(x.n||"").slice(0,20),q:Math.max(0,parseInt(x.q)||0),p:Math.max(0,parseInt(x.p)||0)}));shipOpt=["free100","free50","base"].includes(c.opt)?c.opt:"base";island=c.island===true;return true}}catch(e){}return false}
+function clearCart(){try{localStorage.removeItem(ck())}catch(e){}}
+let restored=false;
+function syncCopy(t){let ok=false;try{const i=document.createElement("input");i.value=t;i.setAttribute("readonly","");i.style.cssText="position:fixed;opacity:0";document.body.appendChild(i);i.select();i.setSelectionRange(0,99);ok=document.execCommand("copy");i.remove()}catch(e){}try{navigator.clipboard&&navigator.clipboard.writeText(t)}catch(e){}return ok}
+function launch(n){
+  const bk=bank(n),acct=cur.a.replace(/-/g,""),ok=syncCopy(acct),s=((/Android/i.test(navigator.userAgent)?bk[4]:bk[3])||"").replace("{A}",acct);
+  const nt=$("#nt");if(nt){nt.className="hint note";nt.textContent=(ok?"계좌번호를 복사했어요. ":"")+(s?n+" 앱이 안 열리면 직접 열어 이체 화면에서 붙여넣어 주세요.":n+" 앱을 열고 이체 화면에서 계좌번호를 붙여넣어 주세요.")}
+  if(s)location.href=s;
+}
+route();
+</script>
+</body>
+</html>
